@@ -1,5 +1,5 @@
-thickness_map = {'6': '1-3/8', '7': '1-3/4', 'T': '2', '8': '3'}
-color_map = {
+thickness = {'6': '1-3/8', '7': '1-3/4', 'T': '2', '8': '3'}
+color = {
     '1': 'Trinar White', 
     '2': 'Trinar Brown', 
     '3': 'Trinar Beige', 
@@ -25,7 +25,7 @@ color_map = {
     'Y': 'Cherry Woodgrain', 
     'U': 'Custom'         
     }
-stamp_map = {
+stamp = {
     'B': 'CH SHORT DIE, CH SPACE, NO RIBS (61 SERIES)',
     'C': 'CH SHORT DIE, CH SPACE, RIBBED (60 SERIES)',
     'D': 'CH SHORT DIE, OLD STD SPACE, NO RIBS (81 SERIES)',
@@ -48,7 +48,7 @@ stamp_map = {
     'X': 'STD DIE, OLD STD SPACE, (80 SERIES)',
     'Z': 'STD DIE, INTL SPACE, STD PRESS (80 SERIES)'
 }
-outside_groove_map = {
+outside_groove = {
     'B': 'CARRIAGE HOUSE SHADOW GROOVE (FLUSH SECTION)',
     'N': 'NO V-GROOVE OR SHADOW GROOVE',
     'S': 'SHADOW GROOVE',
