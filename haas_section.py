@@ -1,19 +1,19 @@
-ht_part_number_rules = {
-    'type': [1],
-    'height': [2,2],
-    'construction': [4],
-    'color': [5],
-    'thickness': [7],
-    'outside_skin': [8],
-    'outside_treatment': [9],
-    'outside_grooving':[10],
-    'inside_skin': [12],
-    'inside_grooving': [13],
-    'length': [15,4],
-    'end_stiles': [19],
-    'backer_stile_placement': [20]
+# define the substring of an HT section
+ht_part_number = {
+    'Type': [0,1],
+    'Height': [1,3],
+    'Construction': [3,4],
+    'Color': [4,5],
+    'Thickness': [6,7],
+    'Outside Skin': [7,8],
+    'Outside Treatment': [8,9],
+    'Outside Grooving':[9,10],
+    'Inside Skin': [11,12],
+    'Inside Grooving': [12,13],
+    'Length': [14,18],
+    'End Stiles': [18,19],
+    'Backer Stile Placement': [19,20]
 }
-
 thickness = {'6': '1-3/8', '7': '1-3/4', 'T': '2', '8': '3'}
 color = {
     '1': 'Trinar White', 
