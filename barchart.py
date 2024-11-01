@@ -30,10 +30,10 @@ def barchart(feature, df, df_owb, df_swb, part_dict={}, min_percentage=0):
     # Filter the DataFrame
     dss_filtered = dss[dss['Percentage'] >= min_percentage]
 
-    # Remove unused headings
-    headings = dss_filtered.head().index.values.tolist()
-    descriptive_name = list(part_dict.values())
-    common_list = list(set(headings).intersection(set(descriptive_name)))
+    # # Remove unused headings
+    # headings = dss_filtered.head().index.values.tolist()
+    # descriptive_name = list(part_dict.values())
+    # common_list = list(set(headings).intersection(set(descriptive_name)))
   
 
     # # Create the bar chart
