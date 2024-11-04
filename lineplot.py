@@ -2,18 +2,26 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 from haas_section import color as c
 
-def barchart(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), part_dict={}, min_percentage=0, xticks=1):
+def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={}, part_dict={}, min_percentage=0, xticks=1):
     # Create a sample Series
+    if filter:
+         for k,v in filter.items():
+              df = df[df[k] == v]
     all_data = df.value_counts(feature)
     all_df = pd.DataFrame(all_data)
     all_df['Percentage'] = (all_df['count']/all_df['count'].sum()) * 100
     all_df['Data'] = 'All Orders'
+    avg_df = np.mean(all_df['Percentage'])
 
     valid_dfs = [all_df]
 
     if feature in df_owb.columns:
+        if filter:
+            for k,v in filter.items():
+                 df_owb = df_owb[df_owb[k] == v]
         bubble_order_data = df_owb.value_counts(feature)
         bubble_order_df = pd.DataFrame(bubble_order_data)
         bubble_order_df['Percentage'] = (bubble_order_df['count']/bubble_order_df['count'].sum()) * 100
@@ -21,6 +29,9 @@ def barchart(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), part_dic
         valid_dfs.append(bubble_order_df)
 
     if feature in df_swb.columns:
+        if filter:
+            for k,v in filter.items():
+                 df_swb = df_swb[df_swb[k] == v]
         bubble_section_data = df_swb.value_counts(feature)
         bubble_section_df = pd.DataFrame(bubble_section_data)
         bubble_section_df['Percentage'] = (bubble_section_df['count']/bubble_section_df['count'].sum()) * 100
@@ -40,25 +51,25 @@ def barchart(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), part_dic
                 if item in dss_index_values:
                     sort_list.append(item)
 
-    # Remove the '.0' from dates
-    # dss.rename(index=lambda x: x.str.replace('.0', ''), inplace=True)
-
     # Filter the DataFrame
     dss_filtered = dss[dss['Percentage'] >= min_percentage]
 
     # Create the bar chart
     fig, ax = plt.subplots(figsize=(20, 5))
 
-    if sort_list:
-        sns.barplot(x=feature, y='Percentage',hue='Data', data=dss_filtered, ax=ax, order=sort_list)
-    else:
-        sns.barplot(x=feature, y='Percentage',hue='Data', data=dss_filtered, ax=ax)
+    sns.lineplot(x=feature, y='Percentage',hue='Data', data=dss_filtered, ax=ax)
+
+    filter_text = ''
+    if filter:
+        for k,v in filter.items():
+            filter_text += ', ' + str(k) + " = " + str(v)
          
     # Customize the chart
-    plt.title(f'{feature} by Percentage')
+    plt.title(f'{feature} by Percentage{filter_text}')
     plt.xticks(rotation=90)
     plt.xlabel(feature)
     plt.ylabel("Percentage")
+    plt.axhline(y=avg_df, color='r', linestyle='--')
 
     # Eliminate some of the x-axis labels
     if xticks > 1:
