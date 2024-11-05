@@ -9,7 +9,7 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
     # Create a sample Series
     if filter:
          for k,v in filter.items():
-              df = df[df[k] == v]
+              df = df[df[k].isin(v)]
     all_data = df.value_counts(feature)
     all_df = pd.DataFrame(all_data)
     all_df['Percentage'] = (all_df['count']/all_df['count'].sum()) * 100
@@ -21,7 +21,7 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
     if feature in df_owb.columns:
         if filter:
             for k,v in filter.items():
-                 df_owb = df_owb[df_owb[k] == v]
+                 df_owb = df_owb[df_owb[k].isin(v)]
         bubble_order_data = df_owb.value_counts(feature)
         bubble_order_df = pd.DataFrame(bubble_order_data)
         bubble_order_df['Percentage'] = (bubble_order_df['count']/bubble_order_df['count'].sum()) * 100
@@ -31,7 +31,7 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
     if feature in df_swb.columns:
         if filter:
             for k,v in filter.items():
-                 df_swb = df_swb[df_swb[k] == v]
+                 df_swb = df_swb[df_swb[k].isin(v)]
         bubble_section_data = df_swb.value_counts(feature)
         bubble_section_df = pd.DataFrame(bubble_section_data)
         bubble_section_df['Percentage'] = (bubble_section_df['count']/bubble_section_df['count'].sum()) * 100
