@@ -1,3 +1,5 @@
+import pandas as pd
+
 weekday = {
     0.0: 'Monday',
     1.0: 'Tuesday',
@@ -60,3 +62,16 @@ year = {
     2025.0: '2025',
     2026.0: '2026'
 }
+
+def split_date_time_stamp(data, timestamp):
+    # # convert timestamp into date/time object
+    # # then make Year, Month and Day and Hour columns
+    data[timestamp] = pd.to_datetime(data[timestamp])
+    data[timestamp] = data[timestamp].dt.round(freq='15min')
+    data['Weekday'] = data[timestamp].dt.day_name()
+    data['Year'] = data[timestamp].dt.year
+    data['Day of Year'] = data[timestamp].dt.day_of_year
+    data['Week'] = data[timestamp].dt.isocalendar().week
+    data['Month'] = data[timestamp].dt.month
+    data['Hour'] = data[timestamp].dt.hour
+    # data['Time'] = data[timestamp].dt.time
