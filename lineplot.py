@@ -26,6 +26,7 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
         bubble_order_df = pd.DataFrame(bubble_order_data)
         bubble_order_df['Percentage'] = (bubble_order_df['count']/bubble_order_df['count'].sum()) * 100
         bubble_order_df['Data'] = 'Bubble Orders'
+        avg_order_df = np.mean(bubble_order_df['Percentage'])
         valid_dfs.append(bubble_order_df)
 
     if feature in df_swb.columns:
@@ -70,6 +71,7 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
     plt.xlabel(feature)
     plt.ylabel("Percentage")
     plt.axhline(y=avg_df, color='r', linestyle='--')
+    plt.axhline(y=avg_order_df, color='y', linestyle='--')
 
     # Eliminate some of the x-axis labels
     if xticks > 1:
