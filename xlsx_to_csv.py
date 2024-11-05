@@ -60,9 +60,3 @@ def xls_to_csv(file_path, selected_columns=[], overwrite=False, multiple_sheets=
     except Exception as error:
         print("An exception occurred:", error)
         print(f'File "{file_path}" not found!')
-
-
-# xls_to_csv('bubble_orders.xlsx',
-#                ['Line', 'Blend','EndOfPourTimeStamp', 'SmartPartNumber', 'Order Number'],
-#                overwrite=False
-#                )
