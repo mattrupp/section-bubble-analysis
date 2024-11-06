@@ -1,6 +1,6 @@
 # Plot Colors bar chart
 import pandas as pd
-import seaborn as sns
+import plotly.express as px
 import matplotlib.pyplot as plt
 import numpy as np
 from haas_section import color as c
@@ -56,9 +56,9 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
     dss_filtered = dss[dss['Percentage'] >= min_percentage]
 
     # Create the bar chart
-    fig, ax = plt.subplots(figsize=(20, 5))
+    figs, ax = plt.subplots(figsize=(20, 5))
 
-    sns.lineplot(x='count', y='Percentage',hue='Data', data=dss_filtered, ax=ax)
+    fig = px.line(x=feature, y='Percentage', data_frame=dss_filtered)
 
     filter_text = ''
     if filter:
@@ -78,4 +78,4 @@ def lineplot(feature, df, df_owb=pd.DataFrame(), df_swb=pd.DataFrame(), filter={
         plt.xticks(range(0, len(dss_filtered.index.unique()), xticks))
 
     # Show the chart
-    plt.show()
+    fig.show()
